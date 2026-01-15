@@ -54,15 +54,16 @@
             padding: 0 20px;
         }
         
-        /* Header & Navigation - 修复的样式 */
+        /* Header & Navigation - 修复顶部显示问题 */
         header {
-            background-color: rgba(10, 42, 67, 0.95);
+            background-color: rgba(10, 42, 67, 0.98);
             backdrop-filter: blur(10px);
             position: fixed;
             width: 100%;
             z-index: 1000;
-            padding: 15px 0;
-            border-bottom: 1px solid rgba(0, 180, 216, 0.2);
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(0, 180, 216, 0.3);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
         }
         
         .nav-container {
@@ -74,41 +75,51 @@
         .logo {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
+            min-width: 300px;
         }
         
         .logo-icon {
             color: var(--accent);
-            font-size: 28px;
+            font-size: 32px;
         }
         
-        .logo-text {
-            font-size: 24px;
+        .logo-text-container {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .logo-main-text {
+            font-size: 22px;
             font-weight: 700;
             background: linear-gradient(to right, var(--accent), var(--accent-light));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            line-height: 1.1;
         }
         
         .logo-tagline {
-            font-size: 12px;
+            font-size: 11px;
             color: var(--accent-light);
-            margin-left: 10px;
             font-weight: 500;
-            letter-spacing: 1px;
+            letter-spacing: 1.2px;
+            margin-top: 2px;
+            text-transform: uppercase;
         }
         
         /* 桌面导航栏 */
         .nav-links {
             display: flex;
-            gap: 30px;
+            gap: 28px;
+            margin: 0 30px;
         }
         
         .nav-links a {
             font-weight: 500;
-            font-size: 16px;
-            transition: color 0.3s;
+            font-size: 15px;
+            transition: all 0.3s;
             position: relative;
+            padding: 8px 0;
         }
         
         .nav-links a:hover {
@@ -118,7 +129,7 @@
         .nav-links a::after {
             content: '';
             position: absolute;
-            bottom: -5px;
+            bottom: 0;
             left: 0;
             width: 0;
             height: 2px;
@@ -132,17 +143,20 @@
         
         .nav-buttons {
             display: flex;
-            gap: 15px;
+            gap: 12px;
+            min-width: 240px;
+            justify-content: flex-end;
         }
         
         .btn {
-            padding: 10px 24px;
+            padding: 10px 20px;
             border-radius: 6px;
             font-weight: 500;
             cursor: pointer;
             transition: all 0.3s;
             border: none;
-            font-size: 15px;
+            font-size: 14px;
+            white-space: nowrap;
         }
         
         .btn-primary {
@@ -153,6 +167,7 @@
         .btn-primary:hover {
             background-color: var(--accent-light);
             transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 180, 216, 0.3);
         }
         
         .btn-secondary {
@@ -164,6 +179,7 @@
         .btn-secondary:hover {
             background-color: rgba(0, 180, 216, 0.1);
             transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 180, 216, 0.2);
         }
         
         .btn-vc {
@@ -174,6 +190,7 @@
         .btn-vc:hover {
             background-color: #7b1fa2;
             transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(156, 39, 176, 0.3);
         }
         
         .btn-quant {
@@ -184,6 +201,7 @@
         .btn-quant:hover {
             background-color: #ffb74d;
             transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 152, 0, 0.3);
         }
         
         /* 移动端菜单按钮 */
@@ -195,11 +213,13 @@
             font-size: 24px;
             cursor: pointer;
             z-index: 1001;
+            padding: 8px;
+            margin-left: 10px;
         }
         
         /* Hero Section */
         .hero {
-            padding: 160px 0 100px;
+            padding: 140px 0 80px;
             background: linear-gradient(135deg, var(--primary) 0%, var(--dark-bg) 100%);
             position: relative;
             overflow: hidden;
@@ -221,7 +241,7 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            gap: 40px;
+            gap: 50px;
         }
         
         .hero-text {
@@ -235,7 +255,7 @@
         }
         
         .hero h1 {
-            font-size: 3.2rem;
+            font-size: 3rem;
             line-height: 1.2;
             margin-bottom: 20px;
         }
@@ -245,10 +265,10 @@
         }
         
         .hero p {
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             color: var(--text-gray);
             margin-bottom: 30px;
-            max-width: 600px;
+            max-width: 550px;
         }
         
         .hero-buttons {
@@ -267,9 +287,10 @@
             display: flex;
             align-items: center;
             gap: 10px;
-            padding: 10px 20px;
+            padding: 12px 24px;
             border-radius: 50px;
             font-weight: 600;
+            font-size: 14px;
         }
         
         .badge-vc {
@@ -284,30 +305,32 @@
             border: 1px solid rgba(255, 152, 0, 0.3);
         }
         
+        /* 加密货币展示 - 移除价格，只展示图标 */
         .crypto-visual {
             width: 100%;
             max-width: 500px;
-            height: 300px;
-            background: linear-gradient(145deg, rgba(19, 39, 61, 0.8) 0%, rgba(30, 77, 122, 0.8) 100%);
+            height: 320px;
+            background: linear-gradient(145deg, rgba(19, 39, 61, 0.9) 0%, rgba(30, 77, 122, 0.9) 100%);
             border-radius: 16px;
             position: relative;
             overflow: hidden;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            padding: 20px;
+            padding: 25px;
+            border: 1px solid rgba(0, 180, 216, 0.2);
         }
         
         .crypto-visual::before {
             content: '';
             position: absolute;
-            width: 200px;
-            height: 200px;
+            width: 250px;
+            height: 250px;
             background: radial-gradient(circle, var(--accent) 0%, transparent 70%);
-            top: -50px;
-            right: -50px;
+            top: -60px;
+            right: -60px;
             opacity: 0.2;
             border-radius: 50%;
         }
@@ -315,58 +338,61 @@
         .crypto-visual::after {
             content: '';
             position: absolute;
-            width: 150px;
-            height: 150px;
+            width: 180px;
+            height: 180px;
             background: radial-gradient(circle, var(--accent-light) 0%, transparent 70%);
-            bottom: -50px;
-            left: -50px;
+            bottom: -60px;
+            left: -60px;
             opacity: 0.15;
             border-radius: 50%;
         }
         
         .visual-title {
             font-size: 1.5rem;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
             color: var(--accent-light);
             z-index: 1;
+            text-align: center;
         }
         
         .crypto-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 15px;
+            gap: 20px;
             z-index: 1;
             width: 100%;
         }
         
         .crypto-item {
-            background-color: rgba(0, 0, 0, 0.3);
-            border-radius: 8px;
-            padding: 12px;
+            background: linear-gradient(145deg, rgba(0, 180, 216, 0.1) 0%, rgba(144, 224, 239, 0.05) 100%);
+            border-radius: 12px;
+            padding: 20px;
             text-align: center;
-            transition: transform 0.3s;
+            transition: all 0.3s;
+            border: 1px solid rgba(0, 180, 216, 0.1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
         }
         
         .crypto-item:hover {
-            transform: translateY(-5px);
-            background-color: rgba(0, 180, 216, 0.1);
+            transform: translateY(-5px) scale(1.05);
+            background: linear-gradient(145deg, rgba(0, 180, 216, 0.2) 0%, rgba(144, 224, 239, 0.1) 100%);
+            border-color: rgba(0, 180, 216, 0.3);
+            box-shadow: 0 10px 20px rgba(0, 180, 216, 0.2);
         }
         
         .crypto-icon {
-            font-size: 24px;
-            margin-bottom: 8px;
+            font-size: 32px;
+            margin-bottom: 12px;
             color: var(--accent);
         }
         
         .crypto-name {
             font-size: 14px;
-            font-weight: 500;
-        }
-        
-        .crypto-price {
-            font-size: 12px;
-            color: var(--success);
-            margin-top: 5px;
+            font-weight: 600;
+            color: var(--text-light);
         }
         
         /* Core Business Section */
@@ -401,10 +427,10 @@
         .business-card {
             flex: 1;
             background-color: var(--card-bg);
-            border-radius: 12px;
+            border-radius: 16px;
             padding: 40px 30px;
             text-align: center;
-            transition: transform 0.3s, box-shadow 0.3s;
+            transition: all 0.3s;
             border: 1px solid rgba(255, 255, 255, 0.05);
         }
         
@@ -418,7 +444,7 @@
         
         .business-card:hover {
             transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
         }
         
         .business-icon {
@@ -492,7 +518,7 @@
             background-color: var(--card-bg);
             border-radius: 12px;
             padding: 30px;
-            transition: transform 0.3s, box-shadow 0.3s;
+            transition: all 0.3s;
             border: 1px solid rgba(255, 255, 255, 0.05);
         }
         
@@ -651,6 +677,26 @@
             .mobile-menu-btn {
                 display: none !important;
             }
+            
+            /* PC端导航栏优化 */
+            .nav-container {
+                flex-wrap: nowrap;
+                justify-content: space-between;
+            }
+            
+            .logo {
+                flex: 0 0 auto;
+            }
+            
+            .nav-links {
+                flex: 1;
+                justify-content: center;
+                margin: 0 20px;
+            }
+            
+            .nav-buttons {
+                flex: 0 0 auto;
+            }
         }
         
         /* 平板和手机端 */
@@ -661,8 +707,8 @@
             
             .nav-links {
                 display: none;
-                position: absolute;
-                top: 100%;
+                position: fixed;
+                top: 70px;
                 left: 0;
                 width: 100%;
                 background-color: var(--primary);
@@ -670,6 +716,8 @@
                 padding: 20px;
                 box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
                 z-index: 1000;
+                max-height: calc(100vh - 70px);
+                overflow-y: auto;
             }
             
             .nav-links.active {
@@ -677,8 +725,9 @@
             }
             
             .nav-links a {
-                padding: 10px 0;
+                padding: 15px 0;
                 border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+                font-size: 16px;
             }
             
             .nav-links a:last-child {
@@ -692,10 +741,11 @@
             .hero-content {
                 flex-direction: column;
                 text-align: center;
+                gap: 40px;
             }
             
             .hero h1 {
-                font-size: 2.8rem;
+                font-size: 2.5rem;
             }
             
             .business-cards {
@@ -706,11 +756,24 @@
                 justify-content: center;
                 flex-wrap: wrap;
             }
+            
+            .logo {
+                min-width: auto;
+                flex: 1;
+            }
+            
+            .logo-main-text {
+                font-size: 20px;
+            }
+            
+            .logo-tagline {
+                font-size: 10px;
+            }
         }
         
         @media (max-width: 768px) {
             .hero h1 {
-                font-size: 2.2rem;
+                font-size: 2rem;
             }
             
             .hero p {
@@ -722,11 +785,21 @@
             }
             
             .btn {
-                padding: 10px 20px;
+                padding: 10px 18px;
+                font-size: 13px;
             }
             
             .crypto-grid {
                 grid-template-columns: repeat(2, 1fr);
+                gap: 15px;
+            }
+            
+            .crypto-item {
+                padding: 15px;
+            }
+            
+            .crypto-icon {
+                font-size: 28px;
             }
             
             .cta-buttons {
@@ -739,19 +812,13 @@
                 max-width: 300px;
             }
             
-            .logo {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 5px;
+            .business-badges {
+                gap: 10px;
             }
             
-            .logo-text {
-                font-size: 20px;
-            }
-            
-            .logo-tagline {
-                font-size: 10px;
-                margin-left: 0;
+            .badge {
+                padding: 10px 20px;
+                font-size: 13px;
             }
         }
         
@@ -773,6 +840,7 @@
             .business-badges {
                 flex-direction: column;
                 align-items: center;
+                gap: 10px;
             }
             
             .nav-container {
@@ -780,7 +848,37 @@
             }
             
             .hero {
-                padding: 140px 0 80px;
+                padding: 120px 0 60px;
+            }
+            
+            .logo-icon {
+                font-size: 28px;
+            }
+            
+            .logo-main-text {
+                font-size: 18px;
+            }
+            
+            .logo-tagline {
+                font-size: 9px;
+                letter-spacing: 1px;
+            }
+        }
+        
+        /* 小屏幕优化 */
+        @media (max-width: 360px) {
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+            
+            .crypto-visual {
+                height: 280px;
+                padding: 20px;
+            }
+            
+            .visual-title {
+                font-size: 1.3rem;
+                margin-bottom: 20px;
             }
         }
     </style>
@@ -793,8 +891,8 @@
                 <div class="logo-icon">
                     <i class="fas fa-water"></i>
                 </div>
-                <div>
-                    <div class="logo-text">Poseidon CryptoTrade</div>
+                <div class="logo-text-container">
+                    <div class="logo-main-text">Poseidon CryptoTrade</div>
                     <div class="logo-tagline">VC INVESTMENT & QUANT TRADING</div>
                 </div>
             </div>
@@ -847,49 +945,43 @@
             </div>
             <div class="hero-image">
                 <div class="crypto-visual">
-                    <h3 class="visual-title">Live Crypto Markets</h3>
+                    <h3 class="visual-title">Supported Cryptocurrencies</h3>
                     <div class="crypto-grid">
                         <div class="crypto-item">
                             <div class="crypto-icon">
                                 <i class="fab fa-bitcoin"></i>
                             </div>
                             <div class="crypto-name">Bitcoin</div>
-                            <div class="crypto-price" id="btc-price">$64,281.30</div>
                         </div>
                         <div class="crypto-item">
                             <div class="crypto-icon">
                                 <i class="fab fa-ethereum"></i>
                             </div>
                             <div class="crypto-name">Ethereum</div>
-                            <div class="crypto-price" id="eth-price">$3,412.56</div>
                         </div>
                         <div class="crypto-item">
                             <div class="crypto-icon">
                                 <i class="fas fa-coins"></i>
                             </div>
                             <div class="crypto-name">Solana</div>
-                            <div class="crypto-price" id="sol-price">$142.18</div>
                         </div>
                         <div class="crypto-item">
                             <div class="crypto-icon">
                                 <i class="fas fa-chart-line"></i>
                             </div>
                             <div class="crypto-name">Cardano</div>
-                            <div class="crypto-price" id="ada-price">$0.52</div>
                         </div>
                         <div class="crypto-item">
                             <div class="crypto-icon">
                                 <i class="fas fa-wave-square"></i>
                             </div>
                             <div class="crypto-name">Polkadot</div>
-                            <div class="crypto-price" id="dot-price">$7.24</div>
                         </div>
                         <div class="crypto-item">
                             <div class="crypto-icon">
                                 <i class="fas fa-rocket"></i>
                             </div>
                             <div class="crypto-name">Avalanche</div>
-                            <div class="crypto-price" id="avax-price">$36.45</div>
                         </div>
                     </div>
                 </div>
@@ -1068,8 +1160,8 @@
                         <div class="logo-icon">
                             <i class="fas fa-water"></i>
                         </div>
-                        <div>
-                            <div class="logo-text">Poseidon CryptoTrade</div>
+                        <div class="logo-text-container">
+                            <div class="logo-main-text">Poseidon CryptoTrade</div>
                             <div class="logo-tagline">VC INVESTMENT & QUANT TRADING</div>
                         </div>
                     </div>
@@ -1161,46 +1253,11 @@
                 const icon = mobileMenuBtn.querySelector('i');
                 icon.classList.remove('fa-times');
                 icon.classList.add('fa-bars');
+                navLinks.style.display = 'flex';
+            } else {
+                navLinks.style.display = 'none';
             }
         });
-        
-        // Simulate live price updates
-        function updatePrices() {
-            const coins = [
-                { id: 'btc-price', base: 64281.30, volatility: 0.02 },
-                { id: 'eth-price', base: 3412.56, volatility: 0.03 },
-                { id: 'sol-price', base: 142.18, volatility: 0.05 },
-                { id: 'ada-price', base: 0.52, volatility: 0.04 },
-                { id: 'dot-price', base: 7.24, volatility: 0.03 },
-                { id: 'avax-price', base: 36.45, volatility: 0.04 }
-            ];
-            
-            coins.forEach(coin => {
-                const element = document.getElementById(coin.id);
-                if (element) {
-                    const change = (Math.random() * 2 - 1) * coin.volatility;
-                    const newPrice = coin.base * (1 + change);
-                    const formattedPrice = newPrice.toLocaleString('en-US', {
-                        style: 'currency',
-                        currency: 'USD',
-                        minimumFractionDigits: newPrice < 1 ? 4 : 2,
-                        maximumFractionDigits: newPrice < 1 ? 4 : 2
-                    });
-                    
-                    // Add color based on change
-                    const isPositive = change >= 0;
-                    element.style.color = isPositive ? 'var(--success)' : 'var(--error)';
-                    
-                    element.textContent = formattedPrice;
-                }
-            });
-        }
-        
-        // Initial update
-        updatePrices();
-        
-        // Update prices every 3 seconds
-        setInterval(updatePrices, 3000);
         
         // Smooth scrolling for navigation links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -1271,6 +1328,10 @@
             } else {
                 navLinks.style.display = 'none';
             }
+            
+            // 移除加密货币价格相关的JavaScript
+            const cryptoPriceElements = document.querySelectorAll('.crypto-price');
+            cryptoPriceElements.forEach(el => el.remove());
         });
     </script>
 </body>
