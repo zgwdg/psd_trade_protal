@@ -54,7 +54,7 @@
             padding: 0 20px;
         }
         
-        /* Header & Navigation */
+        /* Header & Navigation - 修复的样式 */
         header {
             background-color: rgba(10, 42, 67, 0.95);
             backdrop-filter: blur(10px);
@@ -98,6 +98,7 @@
             letter-spacing: 1px;
         }
         
+        /* 桌面导航栏 */
         .nav-links {
             display: flex;
             gap: 30px;
@@ -183,6 +184,17 @@
         .btn-quant:hover {
             background-color: #ffb74d;
             transform: translateY(-2px);
+        }
+        
+        /* 移动端菜单按钮 */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text-light);
+            font-size: 24px;
+            cursor: pointer;
+            z-index: 1001;
         }
         
         /* Hero Section */
@@ -622,8 +634,61 @@
             transform: translateY(-3px);
         }
         
-        /* Responsive Styles */
+        /* ==================== 响应式修复 ==================== */
+        
+        /* 桌面端：始终显示导航链接 */
+        @media (min-width: 993px) {
+            .nav-links {
+                display: flex !important;
+                flex-direction: row;
+                position: static;
+                background-color: transparent;
+                padding: 0;
+                box-shadow: none;
+                width: auto;
+            }
+            
+            .mobile-menu-btn {
+                display: none !important;
+            }
+        }
+        
+        /* 平板和手机端 */
         @media (max-width: 992px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background-color: var(--primary);
+                flex-direction: column;
+                padding: 20px;
+                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+                z-index: 1000;
+            }
+            
+            .nav-links.active {
+                display: flex;
+            }
+            
+            .nav-links a {
+                padding: 10px 0;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            }
+            
+            .nav-links a:last-child {
+                border-bottom: none;
+            }
+            
+            .nav-buttons {
+                display: none;
+            }
+            
             .hero-content {
                 flex-direction: column;
                 text-align: center;
@@ -633,25 +698,13 @@
                 font-size: 2.8rem;
             }
             
-            .nav-links {
-                display: none;
-            }
-            
             .business-cards {
                 flex-direction: column;
             }
             
-            .mobile-menu-btn {
-                display: block;
-                background: none;
-                border: none;
-                color: var(--text-light);
-                font-size: 24px;
-                cursor: pointer;
-            }
-            
             .business-badges {
                 justify-content: center;
+                flex-wrap: wrap;
             }
         }
         
@@ -685,6 +738,21 @@
                 width: 100%;
                 max-width: 300px;
             }
+            
+            .logo {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 5px;
+            }
+            
+            .logo-text {
+                font-size: 20px;
+            }
+            
+            .logo-tagline {
+                font-size: 10px;
+                margin-left: 0;
+            }
         }
         
         @media (max-width: 480px) {
@@ -706,6 +774,14 @@
                 flex-direction: column;
                 align-items: center;
             }
+            
+            .nav-container {
+                padding: 0 15px;
+            }
+            
+            .hero {
+                padding: 140px 0 80px;
+            }
         }
     </style>
 </head>
@@ -723,7 +799,8 @@
                 </div>
             </div>
             
-            <div class="nav-links">
+            <!-- 桌面导航栏 -->
+            <div class="nav-links" id="navLinks">
                 <a href="#home">Home</a>
                 <a href="#business">Core Business</a>
                 <a href="#vc">VC Investment</a>
@@ -732,12 +809,14 @@
                 <a href="#about">About</a>
             </div>
             
+            <!-- 桌面按钮 -->
             <div class="nav-buttons">
                 <button class="btn btn-vc">VC Portal</button>
                 <button class="btn btn-primary">Start Trading</button>
             </div>
             
-            <button class="mobile-menu-btn">
+            <!-- 移动端菜单按钮 -->
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
                 <i class="fas fa-bars"></i>
             </button>
         </div>
@@ -894,7 +973,7 @@
                     </div>
                     <h3>VC Portfolio Dashboard</h3>
                     <p>Real-time tracking of investment portfolio performance with detailed analytics, ROI metrics, and portfolio rebalancing tools.</p>
-                    <a href="#" class="btn btn-secondary">Learn More</a>
+                    <a href="#business" class="btn btn-secondary">Learn More</a>
                 </div>
                 
                 <div class="feature-card">
@@ -903,7 +982,7 @@
                     </div>
                     <h3>AI-Powered Analytics</h3>
                     <p>Advanced machine learning models for market prediction, investment due diligence, and trading signal generation.</p>
-                    <a href="#" class="btn btn-secondary">Learn More</a>
+                    <a href="#business" class="btn btn-secondary">Learn More</a>
                 </div>
                 
                 <div class="feature-card">
@@ -912,7 +991,7 @@
                     </div>
                     <h3>Institutional Security</h3>
                     <p>Multi-signature wallets, cold storage solutions, and insurance coverage for both investments and trading capital.</p>
-                    <a href="#" class="btn btn-secondary">Learn More</a>
+                    <a href="#business" class="btn btn-secondary">Learn More</a>
                 </div>
                 
                 <div class="feature-card">
@@ -921,7 +1000,7 @@
                     </div>
                     <h3>Multi-Chain Access</h3>
                     <p>Trade and invest across Ethereum, Solana, Polkadot, Cosmos, and other leading blockchain ecosystems.</p>
-                    <a href="#" class="btn btn-secondary">Learn More</a>
+                    <a href="#business" class="btn btn-secondary">Learn More</a>
                 </div>
                 
                 <div class="feature-card">
@@ -930,7 +1009,7 @@
                     </div>
                     <h3>High-Performance Trading</h3>
                     <p>Sub-millisecond execution, advanced order types, and direct market access across 30+ crypto exchanges.</p>
-                    <a href="#" class="btn btn-secondary">Learn More</a>
+                    <a href="#business" class="btn btn-secondary">Learn More</a>
                 </div>
                 
                 <div class="feature-card">
@@ -939,7 +1018,7 @@
                     </div>
                     <h3>Expert Network</h3>
                     <p>Access to our network of blockchain founders, developers, researchers, and institutional investors.</p>
-                    <a href="#" class="btn btn-secondary">Learn More</a>
+                    <a href="#business" class="btn btn-secondary">Learn More</a>
                 </div>
             </div>
         </div>
@@ -1007,33 +1086,33 @@
                 <div class="footer-column">
                     <h3>VC Investment</h3>
                     <ul class="footer-links">
-                        <li><a href="#">Portfolio Companies</a></li>
-                        <li><a href="#">Investment Thesis</a></li>
-                        <li><a href="#">Apply for Funding</a></li>
-                        <li><a href="#">Research Reports</a></li>
-                        <li><a href="#">VC Team</a></li>
+                        <li><a href="#business">Portfolio Companies</a></li>
+                        <li><a href="#business">Investment Thesis</a></li>
+                        <li><a href="#business">Apply for Funding</a></li>
+                        <li><a href="#business">Research Reports</a></li>
+                        <li><a href="#business">VC Team</a></li>
                     </ul>
                 </div>
                 
                 <div class="footer-column">
                     <h3>Quantitative Trading</h3>
                     <ul class="footer-links">
-                        <li><a href="#">Trading Strategies</a></li>
-                        <li><a href="#">Performance Metrics</a></li>
-                        <li><a href="#">API Trading</a></li>
-                        <li><a href="#">Institutional Services</a></li>
-                        <li><a href="#">Quant Research</a></li>
+                        <li><a href="#business">Trading Strategies</a></li>
+                        <li><a href="#business">Performance Metrics</a></li>
+                        <li><a href="#business">API Trading</a></li>
+                        <li><a href="#business">Institutional Services</a></li>
+                        <li><a href="#business">Quant Research</a></li>
                     </ul>
                 </div>
                 
                 <div class="footer-column">
                     <h3>Company</h3>
                     <ul class="footer-links">
-                        <li><a href="#">About Us</a></li>
-                        <li><a href="#">Careers</a></li>
-                        <li><a href="#">Partnerships</a></li>
-                        <li><a href="#">Legal & Compliance</a></li>
-                        <li><a href="#">Contact</a></li>
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#about">Careers</a></li>
+                        <li><a href="#about">Partnerships</a></li>
+                        <li><a href="#about">Legal & Compliance</a></li>
+                        <li><a href="#about">Contact</a></li>
                     </ul>
                 </div>
             </div>
@@ -1046,6 +1125,45 @@
     </footer>
 
     <script>
+        // 移动端菜单切换
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const navLinks = document.getElementById('navLinks');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            // 切换菜单图标
+            const icon = mobileMenuBtn.querySelector('i');
+            if (navLinks.classList.contains('active')) {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-times');
+            } else {
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            }
+        });
+        
+        // 点击导航链接后关闭移动菜单（如果是移动端）
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                if (window.innerWidth <= 992) {
+                    navLinks.classList.remove('active');
+                    const icon = mobileMenuBtn.querySelector('i');
+                    icon.classList.remove('fa-times');
+                    icon.classList.add('fa-bars');
+                }
+            });
+        });
+        
+        // 窗口大小改变时重置菜单状态
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 992) {
+                navLinks.classList.remove('active');
+                const icon = mobileMenuBtn.querySelector('i');
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            }
+        });
+        
         // Simulate live price updates
         function updatePrices() {
             const coins = [
@@ -1087,13 +1205,12 @@
         // Smooth scrolling for navigation links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                
                 const targetId = this.getAttribute('href');
                 if (targetId === '#') return;
                 
                 const targetElement = document.querySelector(targetId);
                 if (targetElement) {
+                    e.preventDefault();
                     window.scrollTo({
                         top: targetElement.offsetTop - 80,
                         behavior: 'smooth'
@@ -1102,52 +1219,27 @@
             });
         });
         
-        // Mobile menu toggle
-        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
-        const navLinks = document.querySelector('.nav-links');
-        
-        mobileMenuBtn.addEventListener('click', () => {
-            navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
-            if (navLinks.style.display === 'flex') {
-                navLinks.style.flexDirection = 'column';
-                navLinks.style.position = 'absolute';
-                navLinks.style.top = '70px';
-                navLinks.style.left = '0';
-                navLinks.style.width = '100%';
-                navLinks.style.backgroundColor = 'var(--primary)';
-                navLinks.style.padding = '20px';
-                navLinks.style.gap = '20px';
-                navLinks.style.boxShadow = '0 10px 20px rgba(0,0,0,0.3)';
-            }
-        });
-        
-        // Update window width on resize to handle menu properly
-        window.addEventListener('resize', () => {
-            if (window.innerWidth > 992) {
-                navLinks.style.display = 'flex';
-                navLinks.style.flexDirection = 'row';
-                navLinks.style.position = 'static';
-                navLinks.style.backgroundColor = 'transparent';
-                navLinks.style.padding = '0';
-                navLinks.style.boxShadow = 'none';
-            } else {
-                navLinks.style.display = 'none';
-            }
-        });
-        
         // Button functionality
-        document.querySelector('.btn-vc').addEventListener('click', () => {
-            window.scrollTo({
-                top: document.querySelector('.vc-card').offsetTop - 100,
-                behavior: 'smooth'
-            });
+        document.querySelectorAll('.btn-vc').forEach(btn => {
+            if (btn.textContent.includes('Explore') || btn.textContent.includes('Startup')) {
+                btn.addEventListener('click', () => {
+                    window.scrollTo({
+                        top: document.querySelector('.vc-card').offsetTop - 100,
+                        behavior: 'smooth'
+                    });
+                });
+            }
         });
         
-        document.querySelector('.btn-quant').addEventListener('click', () => {
-            window.scrollTo({
-                top: document.querySelector('.quant-card').offsetTop - 100,
-                behavior: 'smooth'
-            });
+        document.querySelectorAll('.btn-quant').forEach(btn => {
+            if (btn.textContent.includes('Quant') || btn.textContent.includes('Institutional')) {
+                btn.addEventListener('click', () => {
+                    window.scrollTo({
+                        top: document.querySelector('.quant-card').offsetTop - 100,
+                        behavior: 'smooth'
+                    });
+                });
+            }
         });
         
         document.querySelector('.btn-primary').addEventListener('click', () => {
@@ -1170,6 +1262,15 @@
         // Quant trading button
         document.querySelectorAll('.btn-quant')[1].addEventListener('click', () => {
             alert('Institutional Trading Inquiry: This would open a form for institutions interested in our quantitative trading services.');
+        });
+        
+        // 页面加载时检查窗口大小，设置正确的菜单状态
+        window.addEventListener('load', () => {
+            if (window.innerWidth > 992) {
+                navLinks.style.display = 'flex';
+            } else {
+                navLinks.style.display = 'none';
+            }
         });
     </script>
 </body>
